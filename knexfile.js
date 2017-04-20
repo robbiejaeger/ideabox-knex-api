@@ -11,7 +11,7 @@ module.exports = {
   },
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/ideabox_knex_api_shows',
+    connection: 'postgres://localhost/ideabox_knex_api',
     migrations: {
       directory: __dirname + '/db/migrations'
     },
