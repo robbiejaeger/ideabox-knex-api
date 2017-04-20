@@ -1,0 +1,138 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.main-form, .ideas-container {
+  margin: auto;
+  padding-bottom: 30px;
+  width: 500px;
+}
+
+.ideas-container {
+  margin-top: 30px;
+}
+
+header {
+  background-color: #E5F3F2;
+}
+
+h1 {
+  color: #6D6E71;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 3em;
+  text-align: center;
+  padding: 30px;
+}
+
+.colored-text {
+  color: #00A79D;
+}
+
+.form-input {
+  color: #6D6E71;
+  display: block;
+  height: 35px;
+  font-size: 1.2em;
+  width: 100%;
+}
+
+.form-input:focus {
+  outline: 2px solid #6D6E71;
+}
+
+.user-input {
+  border: 2px solid #D1D3D4;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  padding-left: 5px;
+}
+
+.user-input::placeholder {
+  color: #D1D3D4;
+}
+
+.save-btn {
+  border: none;
+  color: #FFF;
+  background-color: #00A79D;
+  text-align: center;
+  padding-bottom: 5px;
+}
+
+.save-btn:hover {
+  background-color: #045E55;
+}
+
+.save-btn:focus {
+  outline: 2px solid #00A79D;
+}
+
+.save-btn:disabled {
+  background-color: #939598;
+}
+
+h3 {
+  color: #6D6E71;
+  font-size: 1.2em;
+  font-weight: 700;
+  display: inline-block;
+  margin: 15px 0;
+}
+
+.delete-btn {
+  background: url('../img/delete.svg') no-repeat;
+  float: right;
+  margin-top: 15px;
+}
+
+.delete-btn:hover {
+  background: url('../img/delete-hover.svg') no-repeat;
+}
+
+.item-btn {
+  border: none;
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  padding-bottom: 7px;
+}
+
+.upvote-btn {
+  background: url('../img/upvote.svg') no-repeat;
+}
+
+.upvote-btn:hover {
+  background: url('../img/upvote-hover.svg') no-repeat;
+}
+
+.downvote-btn {
+  background: url('../img/downvote.svg') no-repeat;
+}
+
+.downvote-btn:hover {
+  background: url('../img/downvote-hover.svg') no-repeat;
+}
+
+.idea-body {
+  color: #939598;
+  line-height: 120%;
+  padding-bottom: 10px;
+}
+
+.idea-quality {
+  color: #6D6E71;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.idea-divider {
+  margin-top: 15px;
+  border: 1px solid #D1D3D4;
+}
+
+@media screen and (max-width: 600px) {
+  .main-form, .ideas-container {
+    width: 90%;
+  }
+}
