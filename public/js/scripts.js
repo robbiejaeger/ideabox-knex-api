@@ -9,15 +9,18 @@ $('.main-form').on('input', determineStateofSaveBtn)
 $('#save-btn').on('click', saveIdea)
 $('#search-input').on('input', queryIdeas)
 
-initializeIdeas()
+$(document).ready(initializeIdeas)
 
 function initializeIdeas(){
-  var ideas = JSON.parse(localStorage.getItem('ideas'))
-  if (!ideas) {
-    localStorage.setItem('ideas', "[]")
-  } else {
-    loadIdeasFromStorage(ideas)
-  }
+  ideasRequest = new XMLHttpRequest()
+  ideasRequest.open('GET', 'api/v1/ideas')
+  ideasRequest.send()
+  ideasRequest.addEventListener('load', function(){
+    JSON.parse(ideasRequest.response).forEach(function(idea){
+      $('.ideas-container').append(ideaTemplate(idea))
+    });
+  })
+
 }
 
 function loadIdeasFromStorage(ideas) {
