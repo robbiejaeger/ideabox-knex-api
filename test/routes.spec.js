@@ -102,4 +102,6 @@ describe('API routes', function(){
       })
     })
   })
+
+  describe('PUT /api/v1/ideas/')
 })

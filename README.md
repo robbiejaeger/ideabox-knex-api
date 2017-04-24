@@ -6,3 +6,17 @@ I wanted to covert it to use a postgresql database through an ExpressJS backend 
 Used [this article](http://mherman.org/blog/2016/04/28/test-driven-development-with-node/#.WPi_sVMrKsx) as a great tutorial.
 
 [Here](https://github.com/robbiejaeger/ideabox-FEm1) is the "original" IdeaBox using `localStorage`.
+
+## Setup
+
+Clone this repo and `cd` into the new directory.
+
+In the terminal, run `npm install`.
+
+## Run the app
+
+In the terminal, run `node server.js` and head over to `localhost:3000`.
+
+## Run the Tests
+
+In the terminal, run `mocha`. (You must have Mocha installed globally for this command to work.)
