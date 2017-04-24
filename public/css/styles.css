@@ -29,6 +29,13 @@ h1 {
   color: #00A79D;
 }
 
+.no-content-banner {
+  color: #6D6E71;
+  font-size: 1.5em;
+  margin: 40px;
+  text-align: center;
+}
+
 .form-input {
   color: #6D6E71;
   display: block;

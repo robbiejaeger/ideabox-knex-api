@@ -17,18 +17,19 @@ function requestAllIdeas(){
   ideasGet.send()
   ideasGet.addEventListener('load', function(){
     var response = JSON.parse(ideasGet.response)
-    if (response !== []) {
+    if (response.length !== 0) {
       response.forEach(function(idea){
         $('.ideas-container').append(ideaTemplate(idea))
       })
     } else {
-      $('.ideas-container').append(`<h2>No Ideas Yet</h2>`)
+      $('.ideas-container').append(`<h2 class="no-content-banner">No Ideas Yet</h2>`)
     }
   })
 }
 
 function saveIdea(e){
   e.preventDefault()
+  removeEmptyContentBanner()
   postNewIdea(constructIdeaFromUserInput())
   clearInputs()
   determineStateofSaveBtn()
@@ -43,6 +44,12 @@ function postNewIdea(idea){
     var response = JSON.parse(ideasPost.response)
     $('.ideas-container').append(ideaTemplate(response))
   })
+}
+
+function removeEmptyContentBanner(){
+  if ($('.no-content-banner')) {
+    $('.no-content-banner').remove()
+  }
 }
 
 function deleteIdeaFromStorage(ideaID){
