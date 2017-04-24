@@ -18,9 +18,14 @@ function add(idea){
   return Ideas().insert(idea, 'id')
 }
 
+function update(ideaID, updates){
+  return Ideas().where('id', parseInt(ideaID)).update(updates)
+}
+
 
 module.exports = {
   getAll: getAll,
   getSingle: getSingle,
-  add: add
+  add: add,
+  update: update
 };
