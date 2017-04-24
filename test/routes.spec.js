@@ -76,4 +76,28 @@ describe('API routes', function(){
       })
     })
   })
+
+  describe('POST /api/v1/ideas', function(){
+    it('should add a new idea', function(done){
+      chai.request(server)
+      .post('/api/v1/ideas')
+      .send({
+        title: 'Posted Idea',
+        body: 'The body of posted idea.',
+      })
+      .end(function(err, res){
+        res.should.have.status(200)
+        res.should.be.json
+        res.body.should.have.property('title')
+        res.body.title.should.equal('Posted Idea')
+        res.body.should.have.property('body')
+        res.body.body.should.equal('The body of posted idea.')
+        res.body.should.have.property('quality')
+        res.body.quality.should.equal(0)
+        res.body.should.have.property('id')
+        res.body.quality.should.equal(1)
+        done()
+      })
+    })
+  })
 })
