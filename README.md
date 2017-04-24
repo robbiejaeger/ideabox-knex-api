@@ -9,17 +9,17 @@ Used [this article](http://mherman.org/blog/2016/04/28/test-driven-development-w
 
 ## Setup
 
-Clone this repo and `cd` into the new directory.
-
-In the terminal, run `npm install`.
-
-## Run the app
-
-In the terminal, run `node server.js` and head over to `localhost:3000`.
+1. Clone this repo and `cd` into the new directory.
+2. In the terminal, run `npm install`.
+3. Add `ideabox_knex_api` and `ideabox_knex_api_test` databases to postgres.
 
 ## Run the Tests
 
 In the terminal, run `mocha`. (You must have Mocha installed globally for this command to work.)
+
+## Run the app
+
+In the terminal, run `node server.js` and head over to `localhost:3000`.
 
 ### Future Work
 
