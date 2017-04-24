@@ -60,14 +60,13 @@ function deleteIdeaFromStorage(ideaID){
   localStorage.setItem('ideas', JSON.stringify(updatedIdeas))
 }
 
-function updateIdeaInStorage(ideaId, propToUpdate, newPropVal){
-  var allIdeas = getIdeasArrayFromStorage()
-  allIdeas.forEach(function(idea){
-    if (idea.id === ideaId) {
-      idea[propToUpdate] = newPropVal
-    }
-  })
-  localStorage.setItem('ideas', JSON.stringify(allIdeas))
+function updateIdeaInDB(ideaId, propToUpdate, newPropVal){
+  ideasPut = new XMLHttpRequest()
+  ideasPut.open('PUT', `api/v1/ideas/${ideaId}`)
+  ideasPut.setRequestHeader('Content-type', 'application/json');
+  var data = {}
+  data[propToUpdate] = newPropVal
+  ideasPut.send(JSON.stringify(data))
 }
 
 function constructIdeaFromUserInput(){
@@ -125,13 +124,13 @@ function queryIdeas(){
 function updateTitleText(){
   var ideaId = $(this).parents('.idea').data('id')
   var newTitle = $(this).text()
-  updateIdeaInStorage(ideaId, "title", newTitle)
+  updateIdeaInDB(ideaId, "title", newTitle)
 }
 
 function updateBodyText(){
   var ideaId = $(this).parents('.idea').data('id')
   var newBody = $(this).text()
-  updateIdeaInStorage(ideaId, "body", newBody)
+  updateIdeaInDB(ideaId, "body", newBody)
 }
 
 function upvote(){
@@ -141,7 +140,7 @@ function upvote(){
 
   if (ideaQualities[currentQuality + 1]) {
     changeQuality($qualityEl, currentQuality + 1)
-    updateIdeaInStorage(ideaId, 'quality', currentQuality + 1)
+    updateIdeaInDB(ideaId, 'quality', currentQuality + 1)
   }
 }
 
@@ -152,7 +151,7 @@ function downvote(){
 
   if (ideaQualities[currentQuality - 1]) {
     changeQuality($qualityEl, currentQuality - 1)
-    updateIdeaInStorage(ideaId, 'quality', currentQuality - 1)
+    updateIdeaInDB(ideaId, 'quality', currentQuality - 1)
   }
 }
 
