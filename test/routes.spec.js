@@ -84,10 +84,12 @@ describe('API routes', function(){
       .send({
         title: 'Posted Idea',
         body: 'The body of posted idea.',
+        quality: 0
       })
       .end(function(err, res){
         res.should.have.status(200)
         res.should.be.json
+        res.should.be.a('object')
         res.body.should.have.property('title')
         res.body.title.should.equal('Posted Idea')
         res.body.should.have.property('body')
@@ -95,7 +97,7 @@ describe('API routes', function(){
         res.body.should.have.property('quality')
         res.body.quality.should.equal(0)
         res.body.should.have.property('id')
-        res.body.quality.should.equal(1)
+        res.body.quality.should.equal(0)
         done()
       })
     })
