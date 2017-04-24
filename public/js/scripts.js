@@ -41,11 +41,7 @@ function postNewIdea(idea){
   ideasPost.send(JSON.stringify(idea))
   ideasPost.addEventListener('load', function(){
     var response = JSON.parse(ideasPost.response)
-    if (Object.keys(response).length !== 0) {
-      $('.ideas-container').append(ideaTemplate(idea))
-    } else {
-      console.log('Something went wrong with the request...')
-    }
+    $('.ideas-container').append(ideaTemplate(response))
   })
 }
 
