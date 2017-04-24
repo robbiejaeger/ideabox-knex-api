@@ -22,10 +22,15 @@ function update(ideaID, updates){
   return Ideas().where('id', parseInt(ideaID)).update(updates)
 }
 
+function deleteItem(ideaID){
+  return Ideas().where('id', parseInt(ideaID)).del()
+}
+
 
 module.exports = {
   getAll: getAll,
   getSingle: getSingle,
   add: add,
-  update: update
+  update: update,
+  deleteItem: deleteItem
 };

@@ -56,4 +56,19 @@ router.put('/ideas/:id', function(req, res, next){
   })
 })
 
+router.delete('/ideas/:id', function(req, res, next){
+  queries.getSingle(req.params.id)
+  .then(function(idea){
+    queries.deleteItem(req.params.id)
+    .then(function(){
+      res.status(200).json(idea)
+    })
+    .catch(function(error){
+      next(error)
+    })
+  }).catch(function(error){
+    next(error)
+  })
+})
+
 module.exports = router
