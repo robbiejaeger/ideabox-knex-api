@@ -20,3 +20,8 @@ In the terminal, run `node server.js` and head over to `localhost:3000`.
 ## Run the Tests
 
 In the terminal, run `mocha`. (You must have Mocha installed globally for this command to work.)
+
+### Future Work
+
+- Test server sad paths
+- Add sad path handling for `XMLHttpRequest` in client-side code
