@@ -22,9 +22,13 @@ function requestAllIdeas(){
         $('.ideas-container').append(ideaTemplate(idea))
       })
     } else {
-      $('.ideas-container').append(`<h2 class="no-content-banner">No Ideas Yet</h2>`)
+      addEmptyContentBanner()
     }
   })
+}
+
+function addEmptyContentBanner(){
+  $('.ideas-container').append(`<h2 class="no-content-banner">No Ideas Yet</h2>`)
 }
 
 function saveIdea(e){
@@ -105,6 +109,7 @@ function deleteIdea(){
   $(this).parents('.idea').remove()
   var ideaId = $(this).parents('.idea').data('id')
   deleteIdeaFromDB(ideaId)
+  if ($('.idea').length === 0) addEmptyContentBanner()
 }
 
 function queryIdeas(){
