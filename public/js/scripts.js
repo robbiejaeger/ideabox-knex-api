@@ -52,12 +52,10 @@ function removeEmptyContentBanner(){
   }
 }
 
-function deleteIdeaFromStorage(ideaID){
-  var allIdeas = getIdeasArrayFromStorage()
-  var updatedIdeas = allIdeas.filter(function(idea){
-    return idea.id !== ideaID
-  })
-  localStorage.setItem('ideas', JSON.stringify(updatedIdeas))
+function deleteIdeaFromDB(ideaId){
+  ideasDelete = new XMLHttpRequest()
+  ideasDelete.open('DELETE', `api/v1/ideas/${ideaId}`)
+  ideasDelete.send()
 }
 
 function updateIdeaInDB(ideaId, propToUpdate, newPropVal){
@@ -106,7 +104,7 @@ function determineStateofSaveBtn(){
 function deleteIdea(){
   $(this).parents('.idea').remove()
   var ideaId = $(this).parents('.idea').data('id')
-  deleteIdeaFromStorage(ideaId)
+  deleteIdeaFromDB(ideaId)
 }
 
 function queryIdeas(){
