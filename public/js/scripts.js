@@ -27,18 +27,6 @@ function requestAllIdeas(){
   })
 }
 
-function addEmptyContentBanner(){
-  $('.ideas-container').append(`<h2 class="no-content-banner">No Ideas Yet</h2>`)
-}
-
-function saveIdea(e){
-  e.preventDefault()
-  removeEmptyContentBanner()
-  postNewIdea(constructIdeaFromUserInput())
-  clearInputs()
-  determineStateofSaveBtn()
-}
-
 function postNewIdea(idea){
   ideasPost = new XMLHttpRequest()
   ideasPost.open('POST', 'api/v1/ideas')
@@ -48,12 +36,6 @@ function postNewIdea(idea){
     var response = JSON.parse(ideasPost.response)
     $('.ideas-container').append(ideaTemplate(response))
   })
-}
-
-function removeEmptyContentBanner(){
-  if ($('.no-content-banner')) {
-    $('.no-content-banner').remove()
-  }
 }
 
 function deleteIdeaFromDB(ideaId){
@@ -71,11 +53,28 @@ function updateIdeaInDB(ideaId, propToUpdate, newPropVal){
   ideasPut.send(JSON.stringify(data))
 }
 
+function saveIdea(e){
+  e.preventDefault()
+  removeEmptyContentBanner()
+  postNewIdea(constructIdeaFromUserInput())
+  clearInputs()
+  determineStateofSaveBtn()
+}
+
+function removeEmptyContentBanner(){
+  if ($('.no-content-banner')) {
+    $('.no-content-banner').remove()
+  }
+}
+
+function addEmptyContentBanner(){
+  $('.ideas-container').append(`<h2 class="no-content-banner">No Ideas Yet</h2>`)
+}
+
 function constructIdeaFromUserInput(){
   return {title: $('#title-input').val(),
           body: $('#body-input').val(),
-          quality: 0
-        }
+          quality: 0}
 }
 
 function ideaTemplate(idea){
