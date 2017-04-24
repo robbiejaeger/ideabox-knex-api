@@ -5,6 +5,10 @@ var apiRouter = require('./api-router')
 var app = express()
 app.set('port', process.env.PORT || 3000);
 
+if (process.env.NODE_ENV !== 'test') {
+  app.use(logger('dev'));
+}
+
 var staticPath = path.join(__dirname, '/public')
 app.use(express.static(staticPath))
 
@@ -17,3 +21,25 @@ app.get('/', function(req, res){
 app.listen(3000, function(){
   console.log('Express app listening on port ' + app.get('port'))
 })
+
+// development error handler will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.json({
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.json({
+    message: err.message,
+    error: {}
+  });
+});
+
+module.exports = app

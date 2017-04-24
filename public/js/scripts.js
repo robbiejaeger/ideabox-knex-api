@@ -16,9 +16,14 @@ function initializeIdeas(){
   ideasRequest.open('GET', 'api/v1/ideas')
   ideasRequest.send()
   ideasRequest.addEventListener('load', function(){
-    JSON.parse(ideasRequest.response).forEach(function(idea){
-      $('.ideas-container').append(ideaTemplate(idea))
-    });
+    var response = JSON.parse(ideasRequest.response)
+    if (response !== []) {
+      response.forEach(function(idea){
+        $('.ideas-container').append(ideaTemplate(idea))
+      })
+    } else {
+      $('.ideas-container').append(`<h2>No Ideas Yet</h2>`)
+    }
   })
 
 }
