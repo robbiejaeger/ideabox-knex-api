@@ -97,7 +97,7 @@ describe('API routes', function(){
         res.body.should.have.property('quality')
         res.body.quality.should.equal(0)
         res.body.should.have.property('id')
-        res.body.quality.should.equal(0)
+        res.body.id.should.equal(3)
         done()
       })
     })

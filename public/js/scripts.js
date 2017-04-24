@@ -9,14 +9,14 @@ $('.main-form').on('input', determineStateofSaveBtn)
 $('#save-btn').on('click', saveIdea)
 $('#search-input').on('input', queryIdeas)
 
-$(document).ready(initializeIdeas)
+$(document).ready(requestAllIdeas)
 
-function initializeIdeas(){
-  ideasRequest = new XMLHttpRequest()
-  ideasRequest.open('GET', 'api/v1/ideas')
-  ideasRequest.send()
-  ideasRequest.addEventListener('load', function(){
-    var response = JSON.parse(ideasRequest.response)
+function requestAllIdeas(){
+  ideasGet = new XMLHttpRequest()
+  ideasGet.open('GET', 'api/v1/ideas')
+  ideasGet.send()
+  ideasGet.addEventListener('load', function(){
+    var response = JSON.parse(ideasGet.response)
     if (response !== []) {
       response.forEach(function(idea){
         $('.ideas-container').append(ideaTemplate(idea))
@@ -25,28 +25,28 @@ function initializeIdeas(){
       $('.ideas-container').append(`<h2>No Ideas Yet</h2>`)
     }
   })
-
-}
-
-function loadIdeasFromStorage(ideas) {
-  ideas.forEach(function(idea){
-    $('.ideas-container').append(ideaTemplate(idea))
-  })
 }
 
 function saveIdea(e){
   e.preventDefault()
-  var idea = constructIdeaFromUserInput()
-  addIdeaToStorage(idea)
-  $('.ideas-container').append(ideaTemplate(idea))
+  postNewIdea(constructIdeaFromUserInput())
   clearInputs()
   determineStateofSaveBtn()
 }
 
-function addIdeaToStorage(idea){
-  var allIdeas = getIdeasArrayFromStorage()
-  allIdeas.push(idea)
-  localStorage.setItem('ideas', JSON.stringify(allIdeas))
+function postNewIdea(idea){
+  ideasPost = new XMLHttpRequest()
+  ideasPost.open('POST', 'api/v1/ideas')
+  ideasPost.setRequestHeader('Content-type', 'application/json');
+  ideasPost.send(JSON.stringify(idea))
+  ideasPost.addEventListener('load', function(){
+    var response = JSON.parse(ideasPost.response)
+    if (Object.keys(response).length !== 0) {
+      $('.ideas-container').append(ideaTemplate(idea))
+    } else {
+      console.log('Something went wrong with the request...')
+    }
+  })
 }
 
 function deleteIdeaFromStorage(ideaID){
@@ -67,15 +67,11 @@ function updateIdeaInStorage(ideaId, propToUpdate, newPropVal){
   localStorage.setItem('ideas', JSON.stringify(allIdeas))
 }
 
-function getIdeasArrayFromStorage(){
-  return JSON.parse(localStorage.getItem('ideas'))
-}
-
 function constructIdeaFromUserInput(){
   return {title: $('#title-input').val(),
           body: $('#body-input').val(),
-          quality: 0,
-          id: Date.now()}
+          quality: 0
+        }
 }
 
 function ideaTemplate(idea){
