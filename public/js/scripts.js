@@ -18,7 +18,9 @@ function requestAllIdeas(){
   ideasGet.addEventListener('load', function(){
     var response = JSON.parse(ideasGet.response)
     if (response.length !== 0) {
-      response.forEach(function(idea){
+      response.sort(function(a, b){
+        return parseInt(a.id) - parseInt(b.id)
+      }).forEach(function(idea){
         $('.ideas-container').append(ideaTemplate(idea))
       })
     } else {
