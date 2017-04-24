@@ -39,7 +39,11 @@ router.post('/ideas', function(req, res, next){
 })
 
 router.put('/ideas/:id', function(req, res, next){
-  console.log(req.params.id, req.body);
+  if(req.body.hasOwnProperty('id')) {
+    return res.status(422).json({
+      error: 'You cannot update the id field'
+    })
+  }
   queries.update(req.params.id, req.body)
   .then(function(){
     return queries.getSingle(req.params.id)
