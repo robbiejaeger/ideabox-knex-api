@@ -66,6 +66,7 @@ describe('API routes', function(){
       .end(function(err, res) {
         res.should.have.status(200)
         res.should.be.json
+        res.should.be.a('object')
         res.body.should.have.property('title')
         res.body.title.should.equal('First Idea!')
         res.body.should.have.property('body')
@@ -103,5 +104,26 @@ describe('API routes', function(){
     })
   })
 
-  describe('PUT /api/v1/ideas/')
+  describe('PUT /api/v1/ideas/:id', function(){
+    it('should update an existing idea', function(done){
+      chai.request(server)
+      .put('/api/v1/ideas/1')
+      .send({
+        body: "Changed body",
+        quality: 2
+      })
+      .end(function(err, res){
+        res.should.have.status(200)
+        res.should.be.json
+        res.body.should.be.a('object')
+        res.body.should.have.property('title')
+        res.body.title.should.equal('First Idea!')
+        res.body.should.have.property('body')
+        res.body.body.should.equal('Changed body')
+        res.body.should.have.property('quality')
+        res.body.quality.should.equal(2)
+        done()
+      })
+    })
+  })
 })

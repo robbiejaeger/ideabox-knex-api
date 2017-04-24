@@ -38,4 +38,8 @@ router.post('/ideas', function(req, res, next){
   })
 })
 
+router.put('/ideas/:id', function(req, res, next){
+  
+})
+
 module.exports = router
