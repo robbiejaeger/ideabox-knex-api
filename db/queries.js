@@ -10,7 +10,12 @@ function getAll() {
   return Ideas().select();
 }
 
+function getSingle(ideaID) {
+  return Ideas().where('id', parseInt(ideaID)).first()
+}
+
 
 module.exports = {
-  getAll: getAll
+  getAll: getAll,
+  getSingle: getSingle
 };
