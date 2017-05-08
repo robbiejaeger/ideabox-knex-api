@@ -1,7 +1,7 @@
 module.exports = {
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/ideabox_knex_api_test',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/ideabox_knex_api_test',
     migrations: {
       directory: __dirname + '/db/migrations'
     },
@@ -21,7 +21,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/jetfueltest',
+    connection: process.env.DATABASE_URL,
     migrations: {
       directory: __dirname + '/db/migrations'
     },
