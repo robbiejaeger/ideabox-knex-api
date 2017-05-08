@@ -11,7 +11,7 @@ app.use(express.static(staticPath))
 app.use('/api/v1', apiRouter)
 
 app.get('/', function(req, res){
-  res.sendFile(path.join(__dirname+'/index.html'))
+  res.sendFile(path.join(__dirname, '/index.html'))
 })
 
 app.listen(3000, function(){
